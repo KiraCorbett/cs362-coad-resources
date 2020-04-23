@@ -32,6 +32,10 @@ RSpec.describe User, type: :model do
 			expect(user).to validate_presence_of(:email)
 		end
 
+		it "is a valid legnth of email" do
+			expect(user).to validate_length_of(:email).is_at_least(1).is_at_most(255)
+		end
+
 		it "is a valid password length" do
 			expect(user).to validate_length_of(:password).is_at_least(7).is_at_most(255)
 		end
