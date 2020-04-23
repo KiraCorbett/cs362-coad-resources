@@ -36,6 +36,10 @@ RSpec.describe User, type: :model do
 			expect(user).to validate_length_of(:email).is_at_least(1).is_at_most(255)
 		end
 
+		it "is a valid email format" do
+			expect(user).to allow_value('test@test.com').for(:email)
+		end
+
 		it "is valid with a password" do
 			expect(user).to validate_presence_of(:password)
 		end
@@ -45,9 +49,8 @@ RSpec.describe User, type: :model do
 		end
 
 		# TODO: see user.rb for these validations that need to be tested
-		# validates :email, format: { with: VALID_EMAIL_REGEX }
+		# double check this one ---> validates :email, format: { with: VALID_EMAIL_REGEX }
 		# validates_uniqueness_of :email, case_sensitive: false
-		# validates_presence_of :password, on: :create
 	end
 
 	# methods
