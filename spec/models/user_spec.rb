@@ -40,6 +40,10 @@ RSpec.describe User, type: :model do
 			expect(user).to allow_value('test@test.com').for(:email)
 		end
 
+		it "is unique email" do
+			expect(user).to validate_uniqueness_of(:email).ignoring_case_sensitivity
+		end
+
 		it "is valid with a password" do
 			expect(user).to validate_presence_of(:password)
 		end
@@ -47,10 +51,6 @@ RSpec.describe User, type: :model do
 		it "is a valid password length" do
 			expect(user).to validate_length_of(:password).is_at_least(7).is_at_most(255)
 		end
-
-		# TODO: see user.rb for these validations that need to be tested
-		# double check this one ---> validates :email, format: { with: VALID_EMAIL_REGEX }
-		# validates_uniqueness_of :email, case_sensitive: false
 	end
 
 	# methods
