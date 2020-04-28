@@ -54,5 +54,12 @@ RSpec.describe User, type: :model do
 	end
 
 	# methods
+	describe "methods" do
+		it "assigns role organization to user" do
+			fake_user = User.new
+			fake_user.set_default_role
+			expect(fake_user.role).to eq(:organization)
+		end
+	end
 
 end
