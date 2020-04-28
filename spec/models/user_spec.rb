@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
 		end
 	end
 
-	# methods
+	methods
 	describe "methods" do
 		it "assigns role organization to user" do
 			fake_user = User.new
@@ -62,4 +62,9 @@ RSpec.describe User, type: :model do
 		end
 	end
 
+	describe '#to_s' do
+    	it 'has a string with an email' do
+      	expect(user.to_s).to eq('test@test.com')
+    end
+  end
 end
