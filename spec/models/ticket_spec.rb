@@ -23,7 +23,7 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "is optional for it to belong to organization" do
-      expect(ticket).to belong_to(:organization) #.optional
+      expect(ticket).to belong_to(:organization).optional
     end
 
   end
