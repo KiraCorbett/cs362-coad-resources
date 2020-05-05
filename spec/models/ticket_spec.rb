@@ -59,9 +59,17 @@ RSpec.describe Ticket, type: :model do
   # Methods
 
   describe "#open?" do
-    it "gets the opposite of ticket's closed attribute" do
-      expect(ticket.open?).to eq(true)
+
+    it "is not open if it is closed" do
+    	closed_ticket = Ticket.new(closed: true)
+      expect(closed_ticket.open?).to be_falsy
     end
+
+    it "is open if it is not closed" do
+      open_ticket = Ticket.new(closed: false)
+      expect(open_ticket.open?).to be_truthy
+    end
+    
   end
 
   describe "#captured?" do
@@ -75,3 +83,10 @@ RSpec.describe Ticket, type: :model do
   end
 
 end
+
+Ticket.open()
+Ticket.closed()
+
+t = Ticket.new
+t.closed
+t.open?
