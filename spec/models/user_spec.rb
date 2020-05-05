@@ -56,16 +56,14 @@ RSpec.describe User, type: :model do
 	describe "#set_default_role" do
 
 		it "assigns role organization to user" do
-			fake_user = User.new
-			fake_user.set_default_role
-			expect(fake_user.role).to eq('organization')
+			user.set_default_role
+			expect(user.role).to eq('organization')
 		end
 
 		it "does not change the role if the user already has one" do
-			fake_user = User.new
-			fake_user.role = :admin
-			fake_user.set_default_role
-			expect(fake_user.role).to_not eq("organization")
+			user.role = :admin
+			user.set_default_role
+			expect(user.role).to_not eq("organization")
 		end
 
 	end
