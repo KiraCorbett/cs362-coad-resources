@@ -4,16 +4,9 @@ RSpec.describe ResourceCategory, type: :model do
 
   let (:resource_category) { ResourceCategory.new }
 
-  describe "attributes" do
-
-    it "has a name" do
-      expect(resource_category).to respond_to(:name)
-    end
-
-    it "is active" do
-      expect(resource_category).to respond_to(:active)
-    end
-
+  describe "properties / attributes" do
+    specify{ expect(resource_category).to respond_to(:name) }
+    specify{ expect(resource_category).to respond_to(:active) }
   end
 
   describe "relationships" do
@@ -41,7 +34,7 @@ RSpec.describe ResourceCategory, type: :model do
     it "is a valid name with valid length" do
       expect(resource_category).to validate_uniqueness_of(:name).ignoring_case_sensitivity
     end
-    
+
   end
 
 end
