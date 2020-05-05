@@ -69,7 +69,7 @@ RSpec.describe Ticket, type: :model do
       open_ticket = Ticket.new(closed: false)
       expect(open_ticket.open?).to be_truthy
     end
-    
+
   end
 
   describe "#captured?" do
@@ -83,10 +83,3 @@ RSpec.describe Ticket, type: :model do
   end
 
 end
-
-Ticket.open()
-Ticket.closed()
-
-t = Ticket.new
-t.closed
-t.open?
