@@ -52,19 +52,19 @@ RSpec.describe User, type: :model do
 		end
 	end
 
-	# # methods
-	# TODO: test set_default_role?
-	# describe "methods" do
-	# 	it "assigns role organization to user" do
-	# 		fake_user = User.new
-	# 		fake_user.set_default_role
-	# 		expect(fake_user.role).to eq(:organization)
-	# 	end
-	# end
+	# Methods
+
+	describe "#set_default_role" do
+		it "assigns role organization to user" do
+			fake_user = User.new
+			fake_user.set_default_role
+			expect(fake_user.role).to eq('organization')
+		end
+	end
 
 	describe '#to_s' do
-    	it 'has a string with an email' do
-      	expect(user.to_s).to eq('test@test.com')
+    it 'has a string with an email' do
+     	expect(user.to_s).to eq('test@test.com')
     end
   end
 end
