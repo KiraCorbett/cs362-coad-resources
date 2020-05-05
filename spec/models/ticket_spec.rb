@@ -4,8 +4,7 @@ RSpec.describe Ticket, type: :model do
 
 	let(:ticket) { Ticket.new }
 
-	# properties / attributes
-	describe "attributes" do
+	describe "properties / attributes" do
 		specify{ expect(ticket).to respond_to(:name) }
 		specify{ expect(ticket).to respond_to(:description) }
 		specify{ expect(ticket).to respond_to(:phone) }
@@ -13,8 +12,8 @@ RSpec.describe Ticket, type: :model do
 		specify{ expect(ticket).to respond_to(:closed_at) }
 	end
 
-	# relationships
 	describe "relationships" do
+
 		it "belongs to region" do
 			expect(ticket).to belong_to(:region)
 		end
@@ -26,10 +25,11 @@ RSpec.describe Ticket, type: :model do
 		it "is optional for it to belong to organization" do
 			expect(ticket).to belong_to(:organization) #.optional
 		end
+
 	end
 
-	# validations
 	describe "validations" do
+
 		it "is valid with a name" do
 			expect(ticket).to validate_presence_of(:name)
 		end
@@ -52,6 +52,25 @@ RSpec.describe Ticket, type: :model do
 			#  2. Assert (expect) that it is valid.
 			#  3. Change the phone number to something invalid. ("fake")
 			#  4. Assert that it is invalid.
+		end
+
+	end
+
+	# Methods
+
+	describe "#open?" do
+		it "gets the opposite of ticket's closed attribute" do
+			expect(ticket.open?).to eq(true)
+		end
+	end
+
+	describe "#captured?" do
+		skip "gets whether or not ticket's organization is present" do
+		end
+	end
+
+	describe "to_s" do
+		skip "has a string with an ID number" do
 		end
 	end
 

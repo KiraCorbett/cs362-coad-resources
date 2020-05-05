@@ -65,15 +65,15 @@ RSpec.describe User, type: :model do
 			fake_user = User.new
 			fake_user.role = :admin
 			fake_user.set_default_role
-			expect(fake_user.role).to_not eq('organization')
+			expect(fake_user.role).to_not eq("organization")
 		end
 
 	end
 
-	describe '#to_s' do
-    it 'has a string with an email' do
-     	expect(user.to_s).to eq('test@test.com')
+	describe "#to_s" do
+    it "has a string with an email" do
+     	expect(user.to_s).to eq("test@test.com")
     end
   end
-  
+
 end
