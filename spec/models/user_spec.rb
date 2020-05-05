@@ -4,8 +4,7 @@ RSpec.describe User, type: :model do
 
 	let(:user) { User.new(email: 'test@test.com', encrypted_password: '123456abcdef', role: '')}
 
-	# properties / attributes
-	describe "attributes" do
+	describe "properties / attributes" do
 		specify{ expect(user).to respond_to(:email) }
 		specify{ expect(user).to respond_to(:encrypted_password) }
 		specify{ expect(user).to respond_to(:reset_password_token) }
@@ -18,15 +17,14 @@ RSpec.describe User, type: :model do
 		specify{ expect(user).to respond_to(:role) }
 	end
 
-	# relationships
 	describe "relationships" do
 		it "belongs to organization" do
 			expect(user).to belong_to(:organization)
 		end		
 	end
 
-	# validations
 	describe "validations" do
+
 		it "is valid with an email" do
 			expect(user).to validate_presence_of(:email)
 		end
@@ -50,16 +48,26 @@ RSpec.describe User, type: :model do
 		it "is a valid password length" do
 			expect(user).to validate_length_of(:password).is_at_least(7).is_at_most(255)
 		end
+
 	end
 
 	# Methods
 
 	describe "#set_default_role" do
+
 		it "assigns role organization to user" do
 			fake_user = User.new
 			fake_user.set_default_role
 			expect(fake_user.role).to eq('organization')
 		end
+
+		it "does not change the role if the user already has one" do
+			fake_user = User.new
+			fake_user.role = :admin
+			fake_user.set_default_role
+			expect(fake_user.role).to_not eq('organization')
+		end
+
 	end
 
 	describe '#to_s' do
@@ -67,4 +75,5 @@ RSpec.describe User, type: :model do
      	expect(user.to_s).to eq('test@test.com')
     end
   end
+  
 end
