@@ -53,6 +53,7 @@ RSpec.describe User, type: :model do
 	end
 
 	# # methods
+	# TODO: test set_default_role?
 	# describe "methods" do
 	# 	it "assigns role organization to user" do
 	# 		fake_user = User.new
