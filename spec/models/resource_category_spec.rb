@@ -37,4 +37,24 @@ RSpec.describe ResourceCategory, type: :model do
 
   end
 
+	describe "#activate" do
+    it "updates to active" do
+      resource_category.active = false
+      resource_category.activate
+      expect(resource_category.active).to eq(true)
+    end
+  end
+	# describe "self unspecified" do
+	# 	it "creates new Unspecified resource category" do
+	# 		expect(resource_category).where(name: 'Unspecified').to be_empty
+	# 	end
+
+	# 	it "does not create a new Unspecified resource category when it exists" do
+	# 		create(:resource_category, :unspecified)
+	# 	end
+
+	# 	it "returns unspecified resource category" do
+ #      		expect(resource_category.unspecified.name).to eq('Unspecified')
+ #    	end
+	# end
 end
