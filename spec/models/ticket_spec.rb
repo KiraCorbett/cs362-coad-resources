@@ -82,4 +82,24 @@ RSpec.describe Ticket, type: :model do
     end
   end
 
+  describe "scopes" do
+    describe "#open" do
+      it "returns open tickets" do
+        region = Region.create(name: 'FAKE')
+        resource_category = ResourceCategory.create(name: 'FAKE')
+        open_ticket = Ticket.create(
+          closed: false,
+          name: 'FAKE',
+          description: 'FAKE',
+          phone: '15416893012',
+          region: region,
+          resource_category: resource_category
+        )
+        
+        open_tickets = Ticket.open
+        expect(open_tickets).to include(open_ticket)
+      end
+    end
+  end
+
 end
