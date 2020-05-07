@@ -70,6 +70,13 @@ RSpec.describe ResourceCategory, type: :model do
     end
 
   end
+
+  describe "#to_s" do
+    it "has a string with a name" do
+      resource_category.name = 'FAKE'
+      expect(resource_category.to_s).to eq('FAKE')
+    end
+  end
 	# describe "self unspecified" do
 	# 	it "creates new Unspecified resource category" do
 	# 		expect(resource_category).where(name: 'Unspecified').to be_empty
