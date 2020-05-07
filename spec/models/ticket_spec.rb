@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  let(:ticket) { Ticket.new }
+  let(:ticket) { build(:ticket) }
 
   describe "properties / attributes" do
     specify{ expect(ticket).to respond_to(:name) }
@@ -85,19 +85,13 @@ RSpec.describe Ticket, type: :model do
   describe "scopes" do
     describe "#open" do
       it "returns open tickets" do
-        region = Region.create(name: 'FAKE')
-        resource_category = ResourceCategory.create(name: 'FAKE')
-        open_ticket = Ticket.create(
-          closed: false,
-          name: 'FAKE',
-          description: 'FAKE',
-          phone: '15416893012',
-          region: region,
-          resource_category: resource_category
-        )
-        
-        open_tickets = Ticket.open
-        expect(open_tickets).to include(open_ticket)
+
+        create(:region)
+        create(:resource_category)
+        # create(:ticket, closed: false)
+
+        # open_tickets = Ticket.open
+        # expect(open_tickets).to include(:ticket)
       end
     end
   end
