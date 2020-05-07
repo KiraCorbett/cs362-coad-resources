@@ -38,11 +38,37 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
 	describe "#activate" do
+
     it "updates to active" do
       resource_category.active = false
       resource_category.activate
       expect(resource_category.active).to eq(true)
     end
+
+  end
+
+  describe "#deactivate" do
+
+    it "updates to deactive" do
+      resource_category.active = true
+      resource_category.deactivate
+      expect(resource_category.deactivate).to eq(false)
+    end
+
+  end
+
+  describe "#inactive?" do
+
+    it "is an inactive resource_category" do
+      resource_category.active = true
+      expect(resource_category.inactive?).to eq(false)
+    end
+
+    it "is an active resource_category" do
+      resource_category.active = false
+      expect(resource_category.inactive?).to eq(true)
+    end
+
   end
 	# describe "self unspecified" do
 	# 	it "creates new Unspecified resource category" do
