@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Ticket, type: :model do
 
   let(:ticket) { build(:ticket) }
+  let(:region) { Region.new }
+  let(:resource_category) { ResourceCategory.new }
 
   describe "properties / attributes" do
     specify{ expect(ticket).to respond_to(:name) }
