@@ -34,7 +34,7 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to validate_presence_of(:name)
     end
 
-    it "is a valid legnth of name" do
+    it "is a valid length of name" do
       expect(ticket).to validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create)
     end
 
@@ -42,11 +42,11 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to validate_presence_of(:phone)
     end
 
-    it "is a valid length of description" do
+    it "has a valid length of description" do
       expect(ticket).to validate_length_of(:description).is_at_most(1020).on(:create)
     end
 
-    skip "is valid with a phone" do
+    skip "has a valid phone" do
       # Steps:
       #  1. Create valid ticket object with all attrs.
       #  2. Assert (expect) that it is valid.
