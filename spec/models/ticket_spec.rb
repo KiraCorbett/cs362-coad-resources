@@ -83,15 +83,19 @@ RSpec.describe Ticket, type: :model do
   end
 
   describe "scopes" do
+
+    #let(:closed_ticket) { create(:ticket, :closed_ticket) }
+    let(:open_ticket) { create(:ticket, :open_ticket) }
+
     describe "#open" do
+      
       it "returns open tickets" do
-
-        create(:region)
-        create(:resource_category)
-        # create(:ticket, closed: false)
-
-        # open_tickets = Ticket.open
-        # expect(open_tickets).to include(:ticket)
+        #create(:region)
+        #create(:resource_category)
+        open_tickets = Ticket.open
+        #byebug
+        expect(open_tickets).to include(open_ticket)
+        #expect(open_tickets).not_to include(closed_ticket)
       end
     end
   end
