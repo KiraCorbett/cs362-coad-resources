@@ -16,6 +16,22 @@ RSpec.describe Region, type: :model do
     end
   end
 
+  describe "validations" do
+    
+    it "is a valid name" do
+      expect(region).to validate_presence_of(:name)
+    end
+
+    it "is a valid length name" do
+      expect(region).to validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create)
+    end
+
+    it "is unique name" do
+      expect(region).to validate_uniqueness_of(:name).ignoring_case_sensitivity
+    end
+
+  end
+
   describe "::unspecified" do
     
     it "creates a new Unspecified resource category when one does not exist" do
