@@ -5,10 +5,10 @@ FactoryBot.define do
     end
     description {'FAKE'}
     phone {'15416893012'}
-    region
-    resource_category
-    #region { create(:region) }
-    #resource_category{ create(:resource_category) }
+    # region
+    # resource_category
+    region_id { create(:region).id }
+    resource_category_id { create(:resource_category).id }
 
     trait :open_ticket do
   		closed { false }

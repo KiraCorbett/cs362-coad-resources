@@ -94,4 +94,8 @@ RSpec.describe ResourceCategory, type: :model do
     end
   end
 
+  describe "scopes" do
+
+  end
+
 end
