@@ -64,6 +64,11 @@ RSpec.describe Organization, type: :model do
     it "has a valid secondary phone" do
       expect(organization).to validate_presence_of(:secondary_phone)
     end
+ 
+     it "has a valid name length" do
+      expect(organization).to validate_length_of(:name).at_least(1).at_most(255).on(:create)
+    end
+
 
   end
 
