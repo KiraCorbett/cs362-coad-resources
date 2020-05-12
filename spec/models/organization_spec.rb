@@ -59,19 +59,33 @@ RSpec.describe Organization, type: :model do
     end
   end
 
-    # describe "#set_default_role" do
+  describe "#reject" do
+    it "approves organization status to reject" do
+      organization.reject
+      expect(organization.status).to eq('rejected')
+    end
+  end
 
-    # it "assigns role organization to user" do
-    #   user.set_default_role
-    #   expect(user.role).to eq('organization')
-    # end
+  describe "#set_default_status" do
+    it "sets organization status to submitted" do
+      organization.set_default_status
+      expect(organization.status).to eq('submitted')
+    end
+  end
 
-    # it "does not change the role if the user already has one" do
-    #   user.role = :admin
-    #   user.set_default_role
-    #   expect(user.role).to_not eq("organization")
-    # end
+  describe "#set_default_status" do
+    it "sets status to default status" do
+      organization.status = nil
+      organization.set_default_status
+      expect(organization.status).to eq('submitted')
+    end
+  end
 
-  #end
+  describe "#to_s" do
+    it "has a string with a name" do
+      organization.name = 'FAKE'
+      expect(organization.to_s).to eq('FAKE')
+    end
+  end
 
 end
