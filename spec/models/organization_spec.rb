@@ -35,4 +35,41 @@ RSpec.describe Organization, type: :model do
 
   end
 
+  describe "validations" do
+ 
+    it "has a valid name" do
+      expect(organization).to validate_presence_of(:name)
+    end
+
+    it "has a valid status" do
+      expect(organization).to validate_presence_of(:status)
+    end
+
+    it "has a valid phone" do
+      expect(organization).to validate_presence_of(:phone)
+    end
+
+    it "has a valid email" do
+      expect(organization).to validate_presence_of(:email)
+    end
+
+    it "has a valid primary name" do
+      expect(organization).to validate_presence_of(:primary_name)
+    end
+
+    it "has a valid secondary name" do
+      expect(organization).to validate_presence_of(:secondary_name)
+    end
+
+    it "has a valid secondary phone" do
+      expect(organization).to validate_presence_of(:secondary_phone)
+    end
+ 
+     it "has a valid name length" do
+      expect(organization).to validate_length_of(:name).at_least(1).at_most(255).on(:create)
+    end
+
+
+  end
+
 end
