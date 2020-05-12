@@ -88,6 +88,7 @@ RSpec.describe Ticket, type: :model do
 
     #let(:closed_ticket) { create(:ticket, :closed_ticket) }
     let(:open_ticket) { create(:ticket, :open_ticket) }
+    let(:closed_ticket) { create(:ticket, :closed_ticket) }
 
     describe "#open" do
       
@@ -99,7 +100,14 @@ RSpec.describe Ticket, type: :model do
         expect(open_tickets).to include(open_ticket)
         #expect(open_tickets).not_to include(closed_ticket)
       end
+
+      it "does not return closed tickets" do
+        open_tickets = Ticket.open
+        expect(open_tickets).to_not include(closed_ticket)
+      end
+
     end
+
   end
 
 end

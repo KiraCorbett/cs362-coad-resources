@@ -13,5 +13,9 @@ FactoryBot.define do
     trait :open_ticket do
   		closed { false }
   	end
+
+    trait :closed_ticket do
+      closed { true }
+    end
 	end
 end
