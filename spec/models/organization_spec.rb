@@ -45,10 +45,12 @@ RSpec.describe Organization, type: :model do
     it { should validate_presence_of(:secondary_name) }
     it { should validate_presence_of(:secondary_phone) }
     it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
-  end
+    it { should allow_value('test@test.com').for(:email) }
+    it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
+    it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
+    it { should validate_uniqueness_of(:name).ignoring_case_sensitivity }
+    it { should validate_length_of(:description).is_at_most(1020).on(:create) }
 
-    # it "is a valid email" do
-    #   expect(organization).to validate(:email).format(with: VALID_EMAIL_REGEX)
-    # end
+  end
 
 end
