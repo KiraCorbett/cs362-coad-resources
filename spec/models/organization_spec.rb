@@ -50,7 +50,28 @@ RSpec.describe Organization, type: :model do
     it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
     it { should validate_uniqueness_of(:name).ignoring_case_sensitivity }
     it { should validate_length_of(:description).is_at_most(1020).on(:create) }
-
   end
+
+  describe "#approve" do
+    it "approves organization status to approve" do
+      organization.approve
+      expect(organization.status).to eq('approved')
+    end
+  end
+
+    # describe "#set_default_role" do
+
+    # it "assigns role organization to user" do
+    #   user.set_default_role
+    #   expect(user.role).to eq('organization')
+    # end
+
+    # it "does not change the role if the user already has one" do
+    #   user.role = :admin
+    #   user.set_default_role
+    #   expect(user.role).to_not eq("organization")
+    # end
+
+  #end
 
 end

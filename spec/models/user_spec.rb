@@ -43,8 +43,6 @@ RSpec.describe User, type: :model do
 
   end
 
-  # Methods
-
   describe "#set_default_role" do
 
     it "assigns role organization to user" do
