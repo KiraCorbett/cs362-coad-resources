@@ -4,9 +4,6 @@ RSpec.describe Ticket, type: :model do
 
   let(:ticket) { build(:ticket) }
 
-  let(:ticket_with_organization) { create(:ticket, :organization) }
-  let(:ticket_without_organization) { create(:ticket) }
-
   describe "properties / attributes" do
     specify{ expect(ticket).to respond_to(:name) }
     specify{ expect(ticket).to respond_to(:description) }
@@ -76,6 +73,9 @@ RSpec.describe Ticket, type: :model do
 
   describe "#captured?" do
 
+    let(:ticket_with_organization) { create(:ticket, :organization) }
+    let(:ticket_without_organization) { create(:ticket) }
+
     it "is captured if organization is present" do
       expect(ticket_with_organization.captured?).to be_truthy
     end
@@ -114,11 +114,21 @@ RSpec.describe Ticket, type: :model do
 
     describe "#all_organization" do
 
+      let(:open_ticket_with_org) { create(:ticket, :open_ticket, :organization) }
+      let(:open_ticket_without_org) { create(:ticket, :open_ticket) }
+      let(:closed_ticket_with_org) { create(:ticket, :closed_ticket, :organization) }
+      let(:closed_ticket_without_org) { create(:ticket, :closed_ticket) }
+
       it "returns all open tickets with an organizations" do
         organization_tickets = Ticket.all_organization
-        expect(organization_tickets).to include(ticket_with_organization)
+        expect(organization_tickets).to include(open_ticket_with_org)
       end
-      
+
+      it "returns all open tickets without an organizations" do
+        organization_tickets = Ticket.all_organization
+        expect(organization_tickets).not_to include(open_ticket_without_org)
+      end
+
     end
 
   end

@@ -13,7 +13,7 @@ FactoryBot.define do
     end
 
     trait :organization do
-      organization_id { create(:organization).id }
+      organization
     end
 
     # scope traits
@@ -25,8 +25,5 @@ FactoryBot.define do
       closed { true }
     end
 
-    trait :all_ticket_organizations do
-      organization
-    end
 	end
 end
