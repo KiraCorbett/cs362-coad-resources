@@ -48,17 +48,16 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to validate_length_of(:description).is_at_most(1020).on(:create)
     end
 
-    skip "has a valid phone" do
-      # Steps:
-      #  1. Create valid ticket object with all attrs.
-      #  2. Assert (expect) that it is valid.
-      #  3. Change the phone number to something invalid. ("fake")
-      #  4. Assert that it is invalid.
+    it "has a valid phone" do
+      expect(ticket).to allow_value('15416893012').for(:phone)
+      # check phony_plausible: true?
+    end
+
+    it "does not have an invalid phone" do
+      expect(ticket).to_not allow_value('FAKE').for(:phone)
     end
 
   end
-
-  # Methods
 
   describe "#open?" do
 
