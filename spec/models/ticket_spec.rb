@@ -86,7 +86,10 @@ RSpec.describe Ticket, type: :model do
   end
 
   describe "to_s" do
-    skip "has a string with an ID number" do
+
+    let(:ticket_with_id) { create(:ticket, :id) }
+    it "has a string with an ID number" do
+      expect(ticket_with_id.to_s).to eq("Ticket 1")
     end
   end
 

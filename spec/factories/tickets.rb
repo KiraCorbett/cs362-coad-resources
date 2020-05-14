@@ -16,6 +16,10 @@ FactoryBot.define do
       closed { true }
     end
 
+    trait :id do
+      id{1}
+    end
+
     trait :organization do
       organization_id { create(:organization).id }
     end
