@@ -129,6 +129,16 @@ RSpec.describe Ticket, type: :model do
         expect(organization_tickets).not_to include(open_ticket_without_org)
       end
 
+      it "returns all closed tickets with an organizations" do
+        organization_tickets = Ticket.all_organization
+        expect(organization_tickets).not_to include(closed_ticket_with_org)
+      end
+
+      it "returns all open tickets without an organizations" do
+        organization_tickets = Ticket.all_organization
+        expect(organization_tickets).not_to include(closed_ticket_without_org)
+      end
+
     end
 
   end
