@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Ticket, type: :model do
 
   let(:ticket) { build(:ticket) }
-  let(:region) { Region.new }
-  let(:resource_category) { ResourceCategory.new }
 
   describe "properties / attributes" do
     specify{ expect(ticket).to respond_to(:name) }
@@ -74,7 +72,16 @@ RSpec.describe Ticket, type: :model do
   end
 
   describe "#captured?" do
-    skip "gets whether or not ticket's organization is present" do
+
+    let(:ticket_with_organization) { create(:ticket, :organization) }
+    let(:ticket_without_organization) { create(:ticket) }
+
+    it "is captured if organization is present" do
+      expect(ticket_with_organization.captured?).to be_truthy
+    end
+
+    it "is not captured if organization is not present" do
+      expect(ticket_without_organization.captured?).to be_falsy
     end
   end
 
