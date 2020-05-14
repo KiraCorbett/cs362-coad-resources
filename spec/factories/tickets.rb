@@ -8,6 +8,15 @@ FactoryBot.define do
     region_id { create(:region).id }
     resource_category_id { create(:resource_category).id }
 
+    trait :id do
+      id{1}
+    end
+
+    trait :organization do
+      organization_id { create(:organization).id }
+    end
+
+    # scope traits
     trait :open_ticket do
   		closed { false }
   	end
@@ -16,12 +25,8 @@ FactoryBot.define do
       closed { true }
     end
 
-    trait :id do
-      id{1}
-    end
-
-    trait :organization do
-      organization_id { create(:organization).id }
+    trait :all_ticket_organizations do
+      organization
     end
 	end
 end
