@@ -197,6 +197,15 @@ RSpec.describe Ticket, type: :model do
 
     end
 
+    describe "#region" do
+
+      it "returns a ticket with a region" do
+        region_tickets = Ticket.region(open_ticket_with_org.region_id)
+        expect(region_tickets).to include(open_ticket_with_org)
+      end
+
+    end
+
   end
 
 end
