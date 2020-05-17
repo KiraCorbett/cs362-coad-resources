@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
 
-  let (:resource_category) { ResourceCategory.new }
+  #let (:resource_category) { ResourceCategory.new }
+  let(:resource_category) { build(:resource_category) }
 
   describe "properties / attributes" do
     specify{ expect(resource_category).to respond_to(:name) }
@@ -68,7 +69,7 @@ RSpec.describe ResourceCategory, type: :model do
     it "updates to deactive" do
       resource_category.active = true
       resource_category.deactivate
-      expect(resource_category.deactivate).to eq(false)
+      expect(resource_category.active).to eq(false)
     end
 
   end
@@ -95,6 +96,23 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
   describe "scopes" do
+
+    # describe "#active" do
+      
+    #   let(:active_resource_categories) { create(:resource_category, :active) }
+    #   let(:inactive_resource_categories) { create(:resource_category, :inactive) }
+
+    #   it "returns all active resource categories" do
+    #     active_resource_categories = ResourceCategory.active
+    #     expect(active_resource_categories).to include(active_resource_categories)
+    #   end
+
+    #   it "returns all inactive resource categories" do
+    #     inactive_resource_categories = ResourceCategory.inactive
+    #     expect(inactive_resource_categories).not_to include(inactive_resource_categories)
+    #   end
+
+    # end
 
   end
 

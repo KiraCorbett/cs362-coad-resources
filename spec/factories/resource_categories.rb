@@ -5,5 +5,10 @@ FactoryBot.define do
 		trait :unspecified do
     		name { 'Unspecified' }
 		end
+
+		# scope traits
+		trait :active do
+			active { true }
+		end
 	end
 end
