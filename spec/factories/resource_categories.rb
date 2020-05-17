@@ -10,5 +10,9 @@ FactoryBot.define do
 		trait :active_resource_category do
 			active { true }
 		end
+
+		trait :inactive_resource_category do
+			active { false }
+		end
 	end
 end
