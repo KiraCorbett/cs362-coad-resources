@@ -7,7 +7,7 @@ FactoryBot.define do
 		end
 
 		# scope traits
-		trait :active do
+		trait :active_resource_category do
 			active { true }
 		end
 	end
