@@ -101,6 +101,7 @@ RSpec.describe Ticket, type: :model do
     let(:open_ticket_without_org) { create(:ticket, :open_ticket) }
     let(:closed_ticket_with_org) { create(:ticket, :closed_ticket, :organization) }
     let(:closed_ticket_without_org) { create(:ticket, :closed_ticket) }
+    let(:organization) { create(:organization) }
 
     describe "#open" do
 
@@ -109,7 +110,7 @@ RSpec.describe Ticket, type: :model do
         expect(open_tickets).to include(open_ticket)
       end
 
-      it "returns closed tickets" do
+      it "does not return closed tickets" do
         open_tickets = Ticket.open
         expect(open_tickets).to_not include(closed_ticket)
       end
@@ -123,17 +124,17 @@ RSpec.describe Ticket, type: :model do
         expect(organization_tickets).to include(open_ticket_with_org)
       end
 
-      it "returns all open tickets without organizations" do
+      it "does not return all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(open_ticket_without_org)
       end
 
-      it "returns all closed tickets with organizations" do
+      it "does not return all closed tickets with organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(closed_ticket_with_org)
       end
 
-      it "returns all open tickets without organizations" do
+      it "does not return all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(closed_ticket_without_org)
       end
@@ -142,30 +143,56 @@ RSpec.describe Ticket, type: :model do
 
     describe "#organization" do
 
-      let(:organization) { create(:organization) }
-
       it "returns open tickets with organization id" do
         org_id = open_ticket_with_org.organization.id
         organization_tickets = Ticket.organization(org_id)
         expect(organization_tickets).to include(open_ticket_with_org)
       end
 
-      it "returns closed tickets with organization id" do
+      it "does not return closed tickets with organization id" do
         org_id = closed_ticket_with_org.organization.id
         organization_tickets = Ticket.organization(org_id)
         expect(organization_tickets).not_to include(closed_ticket_with_org)
       end
 
-      it "returns open tickets with a different organization" do
+      it "does not return open tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.organization(org_id)
         expect(organization_tickets).not_to include(open_ticket)
       end
 
-      it "returns closed tickets with a different organization" do
+      it "does not return closed tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.organization(org_id)
         expect(organization_tickets).not_to include(closed_ticket)
+      end
+
+    end
+
+    describe "#closed_organization" do
+
+      it "returns closed tickets with organization id" do
+        org_id = closed_ticket_with_org.organization.id
+        organization_tickets = Ticket.closed_organization(org_id)
+        expect(organization_tickets).to include(closed_ticket_with_org)
+      end
+
+      it "does not return open tickets with organization id" do
+        org_id = open_ticket_with_org.organization.id
+        organization_tickets = Ticket.closed_organization(org_id)
+        expect(organization_tickets).not_to include(open_ticket_with_org)
+      end
+
+      it "does not return closed tickets with a different organization" do
+        org_id = organization.id
+        organization_tickets = Ticket.closed_organization(org_id)
+        expect(organization_tickets).not_to include(closed_ticket)
+      end
+
+      it "does not return open tickets with a different organization" do
+        org_id = organization.id
+        organization_tickets = Ticket.closed_organization(org_id)
+        expect(organization_tickets).not_to include(open_ticket)
       end
 
     end
