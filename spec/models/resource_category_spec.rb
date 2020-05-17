@@ -114,6 +114,23 @@ RSpec.describe ResourceCategory, type: :model do
 
     end
 
+    describe "#inactive" do
+      
+      let(:active_resource_category) { create(:resource_category, :active_resource_category) }
+      let(:inactive_resource_category) { create(:resource_category, :inactive_resource_category) }
+
+      it "returns all active resource categories" do
+        inactive_resource_categories = ResourceCategory.inactive
+        expect(inactive_resource_categories).to include(inactive_resource_category)
+      end
+
+      it "returns all inactive resource categories" do
+        active_resource_categories = ResourceCategory.inactive
+        expect(active_resource_categories).not_to include(active_resource_category)
+      end
+
+    end
+
   end
 
 end
