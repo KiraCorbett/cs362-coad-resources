@@ -95,6 +95,7 @@ RSpec.describe Ticket, type: :model do
 
   describe "scopes" do
 
+    let(:ticket) { create(:ticket) }
     let(:open_ticket) { create(:ticket, :open_ticket) }
     let(:closed_ticket) { create(:ticket, :closed_ticket) }
     let(:open_ticket_with_org) { create(:ticket, :open_ticket, :organization) }
@@ -199,9 +200,24 @@ RSpec.describe Ticket, type: :model do
 
     describe "#region" do
 
-      it "returns a ticket with a region" do
+      it "returns tickets with a region id" do
         region_tickets = Ticket.region(open_ticket_with_org.region_id)
         expect(region_tickets).to include(open_ticket_with_org)
+      end
+
+      it "does not return tickets with a region id" do
+        region_tickets = Ticket.region(closed_ticket_with_org.region_id)
+        expect(region_tickets).to include(closed_ticket_with_org)
+      end
+
+      it "does not return open tickets with a region id" do
+        region_tickets = Ticket.region(open_ticket.region_id)
+        expect(region_tickets).to include(open_ticket)
+      end
+
+      it "does not return closed tickets with a region id" do
+        region_tickets = Ticket.region(closed_ticket.region_id)
+        expect(region_tickets).to include(closed_ticket)
       end
 
     end
