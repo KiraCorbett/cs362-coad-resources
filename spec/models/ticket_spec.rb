@@ -119,27 +119,81 @@ RSpec.describe Ticket, type: :model do
       let(:closed_ticket_with_org) { create(:ticket, :closed_ticket, :organization) }
       let(:closed_ticket_without_org) { create(:ticket, :closed_ticket) }
 
-      it "returns all open tickets with an organizations" do
+      it "returns all open tickets with organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).to include(open_ticket_with_org)
       end
 
-      it "returns all open tickets without an organizations" do
+      it "returns all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(open_ticket_without_org)
       end
 
-      it "returns all closed tickets with an organizations" do
+      it "returns all closed tickets with organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(closed_ticket_with_org)
       end
 
-      it "returns all open tickets without an organizations" do
+      it "returns all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
         expect(organization_tickets).not_to include(closed_ticket_without_org)
       end
 
     end
+
+    describe "#organization" do
+
+      let(:open_ticket_with_org) { create(:ticket, :open_ticket, :organization) }
+      let(:open_ticket_without_org) { create(:ticket, :open_ticket) }
+      let(:closed_ticket_with_org) { create(:ticket, :closed_ticket, :organization) }
+      let(:closed_ticket_without_org) { create(:ticket, :closed_ticket) }
+
+
+      it "returns open tickets with organizations" do
+        org_id = open_ticket_with_org.organization.id
+        organization_tickets = Ticket.organization(org_id)
+        expect(organization_tickets).to include(open_ticket_with_org)
+      end
+
+    end
+
+
+
+  # describe "::organization" do
+
+  #   it "retrieves open tickets for an organization" do
+  #     ticket = create(:ticket, :open, :add_organization)
+  #     org_id = ticket.organization.id
+  #     organization_tickets = Ticket.organization(org_id)
+  #     expect(organization_tickets).to include(ticket)
+  #   end
+
+  #   it "does not retrieve closed tickets for an organization" do
+  #     ticket = create(:ticket, :closed, :add_organization)
+  #     org_id = ticket.organization.id
+  #     organization_tickets = Ticket.organization(org_id)
+  #     expect(organization_tickets).not_to include(ticket)
+  #   end
+
+  #   it "does not retrieve open tickets for a different organization" do
+  #     ticket = create(:ticket, :open, :add_organization)
+  #     organization = create(:organization)
+  #     org_id = organization.id
+  #     organization_tickets = Ticket.organization(org_id)
+  #     expect(organization_tickets).not_to include(ticket)
+  #   end
+
+  #   it "does not retrieve closed tickets for a different organization" do
+  #     ticket = create(:ticket, :closed, :add_organization)
+  #     organization = create(:organization)
+  #     org_id = organization.id
+  #     organization_tickets = Ticket.organization(org_id)
+  #     expect(organization_tickets).not_to include(ticket)
+  #   end
+
+
+
+
 
   end
 
