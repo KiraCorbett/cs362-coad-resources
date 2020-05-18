@@ -95,7 +95,6 @@ RSpec.describe Ticket, type: :model do
 
   describe "scopes" do
 
-    let(:ticket) { create(:ticket) }
     let(:open_ticket) { create(:ticket, :open_ticket) }
     let(:closed_ticket) { create(:ticket, :closed_ticket) }
     let(:open_ticket_with_org) { create(:ticket, :open_ticket, :organization) }
@@ -127,17 +126,17 @@ RSpec.describe Ticket, type: :model do
 
       it "does not return all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
-        expect(organization_tickets).not_to include(open_ticket_without_org)
+        expect(organization_tickets).to_not include(open_ticket_without_org)
       end
 
       it "does not return all closed tickets with organizations" do
         organization_tickets = Ticket.all_organization
-        expect(organization_tickets).not_to include(closed_ticket_with_org)
+        expect(organization_tickets).to_not include(closed_ticket_with_org)
       end
 
       it "does not return all open tickets without organizations" do
         organization_tickets = Ticket.all_organization
-        expect(organization_tickets).not_to include(closed_ticket_without_org)
+        expect(organization_tickets).to_not include(closed_ticket_without_org)
       end
 
     end
@@ -153,19 +152,19 @@ RSpec.describe Ticket, type: :model do
       it "does not return closed tickets with organization id" do
         org_id = closed_ticket_with_org.organization.id
         organization_tickets = Ticket.organization(org_id)
-        expect(organization_tickets).not_to include(closed_ticket_with_org)
+        expect(organization_tickets).to_not include(closed_ticket_with_org)
       end
 
       it "does not return open tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.organization(org_id)
-        expect(organization_tickets).not_to include(open_ticket)
+        expect(organization_tickets).to_not include(open_ticket)
       end
 
       it "does not return closed tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.organization(org_id)
-        expect(organization_tickets).not_to include(closed_ticket)
+        expect(organization_tickets).to_not include(closed_ticket)
       end
 
     end
@@ -181,47 +180,50 @@ RSpec.describe Ticket, type: :model do
       it "does not return open tickets with organization id" do
         org_id = open_ticket_with_org.organization.id
         organization_tickets = Ticket.closed_organization(org_id)
-        expect(organization_tickets).not_to include(open_ticket_with_org)
+        expect(organization_tickets).to_not include(open_ticket_with_org)
       end
 
       it "does not return closed tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.closed_organization(org_id)
-        expect(organization_tickets).not_to include(closed_ticket)
+        expect(organization_tickets).to_not include(closed_ticket)
       end
 
       it "does not return open tickets with a different organization" do
         org_id = organization.id
         organization_tickets = Ticket.closed_organization(org_id)
-        expect(organization_tickets).not_to include(open_ticket)
+        expect(organization_tickets).to_not include(open_ticket)
       end
 
     end
 
     describe "#region" do
 
-      it "returns tickets with a region id" do
-        region_tickets = Ticket.region(open_ticket_with_org.region_id)
+      it "returns open organization tickets with region id" do
+        region_id = open_ticket_with_org.region_id
+        region_tickets = Ticket.region(region_id)
         expect(region_tickets).to include(open_ticket_with_org)
       end
 
-      it "does not return tickets with a region id" do
-        region_tickets = Ticket.region(closed_ticket_with_org.region_id)
+      it "returns closed organization tickets with region id" do
+        region_id = closed_ticket_with_org.region_id
+        region_tickets = Ticket.region(region_id)
         expect(region_tickets).to include(closed_ticket_with_org)
       end
 
-      it "does not return open tickets with a region id" do
-        region_tickets = Ticket.region(open_ticket.region_id)
+      it "returns open tickets with region id" do
+        region_id = open_ticket.region_id
+        region_tickets = Ticket.region(region_id)
         expect(region_tickets).to include(open_ticket)
       end
 
-      it "does not return closed tickets with a region id" do
-        region_tickets = Ticket.region(closed_ticket.region_id)
+      it "returns closed tickets with region id" do
+        region_id = closed_ticket.region_id
+        region_tickets = Ticket.region(region_id)
         expect(region_tickets).to include(closed_ticket)
       end
 
     end
 
   end
-
 end
