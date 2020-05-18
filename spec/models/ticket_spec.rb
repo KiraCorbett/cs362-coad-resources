@@ -225,5 +225,33 @@ RSpec.describe Ticket, type: :model do
 
     end
 
+    describe "#resource_category" do
+
+      it "returns open organization tickets with resource category id" do
+        resource_id = open_ticket_with_org.resource_category_id
+        region_tickets = Ticket.resource_category(resource_id)
+        expect(region_tickets).to include(open_ticket_with_org)
+      end
+
+      it "returns closed organization tickets with region id" do
+        resource_id = closed_ticket_with_org.resource_category_id
+        region_tickets = Ticket.resource_category(resource_id)
+        expect(region_tickets).to include(closed_ticket_with_org)
+      end
+
+      it "returns open tickets with region id" do
+        resource_id = open_ticket.resource_category_id
+        region_tickets = Ticket.resource_category(resource_id)
+        expect(region_tickets).to include(open_ticket)
+      end
+
+      it "returns closed tickets with region id" do
+        resource_id = closed_ticket.resource_category_id
+        region_tickets = Ticket.resource_category(resource_id)
+        expect(region_tickets).to include(closed_ticket)
+      end
+
+    end
+
   end
 end
