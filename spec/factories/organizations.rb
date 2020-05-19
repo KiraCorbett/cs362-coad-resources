@@ -8,7 +8,7 @@ FactoryBot.define do
 	    phone {'15416893012'}
 	    email {'test@test.com'}
 	    primary_name {'FAKENAME'}
-	    secondary_name {'FAKENAME2'}
+	    secondary_name {'FAKENAME'}
 	    secondary_phone {'15416893013'}
 	end
 end

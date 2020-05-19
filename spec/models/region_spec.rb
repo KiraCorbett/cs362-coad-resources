@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) { Region.new }
+  let(:region) { build(:region) }
 
   describe "properties / attributes" do
     it "has a name" do

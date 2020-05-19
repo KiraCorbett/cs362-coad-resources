@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) { User.new(email: 'test@test.com', encrypted_password: '123456abcdef', role: '')}
+  let(:user) { build(:user) }
 
   describe "properties / attributes" do
     specify{ expect(user).to respond_to(:email) }
@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
 
   describe "#to_s" do
     it "has a string with an email" do
-      expect(user.to_s).to eq("test@test.com")
+      expect(user.to_s).to eq("#{user.email}")
     end
   end
 
