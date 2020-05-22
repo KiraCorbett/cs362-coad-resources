@@ -5,10 +5,7 @@ RSpec.describe 'Deleting a Region', type: :feature do
 		User.create(email: 'test@test.com', password: 'password',
 					password_confirmation: 'password', role: 'admin')
 	end
-	let(:region) do
 
-
-	end
 	before do
 		admin.confirm
 		log_in_as(admin)
