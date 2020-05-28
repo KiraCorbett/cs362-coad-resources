@@ -33,5 +33,3 @@ RSpec.describe 'Creating a Ticket', type: :feature do
 		end
 	end
 end
-
-     #create(:user, :admin)
