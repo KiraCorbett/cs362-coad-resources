@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating a Ticket', type: :feature do
-	let(:user) { create(:user) }
+	let(:organization) { create(:organization, :approved) }
+	let(:user) { create(:user, organization: organization) }
 
 	before do
 		log_in_as(user)
