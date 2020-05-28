@@ -16,5 +16,13 @@ RSpec.describe 'Logging in', type: :feature do
 			click_on "commit"
 			expect(page).to have_content("Dashboard")
 		end
+
+		it "does not successfully logs in in user" do
+			visit login_path
+			fill_in "user_email", with: ""
+			fill_in "user_password", with: user.password
+			click_on "commit"
+			expect(page).to have_content("Invalid Email or password.")
+		end
 	end
 end
