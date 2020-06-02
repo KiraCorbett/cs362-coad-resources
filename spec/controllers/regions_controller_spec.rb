@@ -84,7 +84,6 @@ RSpec.describe RegionsController, type: :controller do
 		describe 'DELETE #destroy' do
 			specify { expect(delete(:destroy, params: {id: region.id})).to redirect_to(regions_path) }
 		end
-
 	end
 
 end
